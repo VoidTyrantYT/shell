@@ -1,0 +1,30 @@
+# Panel Configuration for My Minecraft Panel
+# Generated on: 2025-07-26T08:11:48.667Z
+
+panel:
+  name: "My Minecraft Panel"
+  type: "Custom Panel"
+  version: "latest"
+  
+server:
+  minecraft_version: "Latest"
+  memory_allocation: 8
+  java_version: "17"
+  
+security:
+  ssl_enabled: true
+  authentication: "Database Authentication"
+  
+database:
+  type: "MySQL 8.0"
+  cache_enabled: true
+  
+deployment:
+  environment: "Development"
+  log_level: "INFO"
+  auto_deploy: false
+  
+github:
+  repository: "minecraft-panel-config"
+  branch: "main"
+  actions_enabled: false

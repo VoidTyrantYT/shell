@@ -1,0 +1,46 @@
+# Generated Docker Compose for My Minecraft Panel
+# Panel Type: Custom Panel
+# Generated on: 2025-07-26T08:11:48.666Z
+
+version: '3.8'
+services:
+  panel:
+    image: node:18-alpine
+    ports:
+      - '80:80'
+      - '443:443'
+      - '8080:8080'
+    environment:
+      - APP_ENV=Development
+      - APP_DEBUG=false
+      - DB_HOST=mysql
+      - DB_DATABASE=panel
+      - DB_USERNAME=panel
+      - DB_PASSWORD=${DB_PASSWORD}
+      - CACHE_DRIVER=redis
+      - REDIS_HOST=redis
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    depends_on:
+      - mysql
+      - redis
+    restart: unless-stopped
+  mysql:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_DATABASE=panel
+      - MYSQL_USER=panel
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: unless-stopped
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+volumes:
+  mysql_data: {}
+  redis_data: {}
